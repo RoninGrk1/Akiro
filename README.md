@@ -1,108 +1,78 @@
 # Akiro
 
-**One website. Twenty tools. One expert AI. Zero unnecessary complexity.**
+One website. Twenty tools. One expert AI.
 
-Akiro is a lightweight Web3 development environment — design-system-first, developer-focused, and built so the coding → contract → deploy loop lives in one place.
+Akiro is a Web3 development environment — code, contracts, terminal, and deploy tools in one place.
 
-> Official product name: **Akiro** (British English UI).
-
-## Local-first production mode
-
-This build prefers **real local behaviour** over demos:
-
-| Feature | Status without cloud secrets |
-| --- | --- |
-| On-disk workspace (`/workspace/akiro-projects/default`) | **Available** |
-| File list/read/write APIs | **Available** |
-| Sandboxed terminal (allowlisted) | **Available** |
-| solc compile → real ABI/bytecode | **Available** |
-| SQLite console (`akiro.db`) | **Available** |
-| HTTP API client (SSRF-safe) | **Available** |
-| RPC health (`eth_chainId` / `eth_blockNumber`) | **Available** |
-| Injected browser wallet (wagmi/viem) | **Available** (needs extension) |
-| Env vault (AES-GCM) | **Available** when `ENV_VAULT_SECRET` in `.env.local` |
-| WalletConnect / GitHub OAuth / IPFS / Vercel / AI | **Needs configuration** — no fake success |
-
-## Stack
-
-- **Next.js** (App Router) · **React** · **TypeScript**
-- **Tailwind CSS** brand tokens · **Monaco**
-- **solc** (server) · **viem** / **wagmi** · **sql.js**
-- Vitest · British English (`en-GB`)
-
-### Brand
-
-| Token | Value |
-| --- | --- |
-| Background | `#080B0D` |
-| Accent green | `#22E676` |
-| Accent blue | `#3478F6` |
-| Gold | `#D9A441` |
-
-## How to run
+## Quick start
 
 ```bash
-cd /workspace/akiro   # or your clone path
+git clone https://github.com/RoninGrk1/Akiro.git
+cd Akiro
+cp .env.example .env.local
+# add random secrets (required for the env vault / sessions):
+echo "ENV_VAULT_SECRET=$(openssl rand -hex 32)" >> .env.local
+echo "NEXTAUTH_SECRET=$(openssl rand -hex 32)" >> .env.local
 npm install
-# First setup: ensure .env.local exists (see below)
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
 
+Useful commands:
+
 ```bash
-npm run build && npm start
-npm run lint
 npm test
+npm run lint
+npm run build
 ```
 
-### Local secrets (`.env.local`)
+Do not commit `.env.local`.
 
-Copy `.env.example` → `.env.local`. On first setup this repo may already contain a generated:
+## What works out of the box
 
-- `ENV_VAULT_SECRET` — AES-GCM key for the env vault
-- `NEXTAUTH_SECRET` — session secret placeholder
+These run locally with no cloud API keys:
 
-Generate yourself if missing:
+- File workspace (edit and save real project files)
+- Terminal (safe allowlisted commands)
+- Solidity compiler (real solc)
+- SQLite database console
+- HTTP API tester
+- RPC health checks
+- Browser wallet connect (MetaMask and similar)
 
-```bash
-echo "ENV_VAULT_SECRET=$(openssl rand -hex 32)" >> .env.local
-echo "NEXTAUTH_SECRET=$(openssl rand -hex 32)" >> .env.local
-```
+## What needs a key
 
-**Never commit `.env.local`.** Optional cloud vars are documented in `.env.example`.
+These stay off until you add credentials in `.env.local` (see `.env.example`):
 
-## Architecture
+- AI Coding Lab → `AI_API_KEY`
+- WalletConnect → `NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID`
+- GitHub sign-in → `GITHUB_CLIENT_ID` / `GITHUB_CLIENT_SECRET`
+- IPFS → `IPFS_JWT` or `WEB3_STORAGE_TOKEN`
+- Vercel deploy → `VERCEL_TOKEN`
 
-```
-/workspace/akiro-projects/default   On-disk Foundry+Next starter (source of truth)
-src/app/api/*                       Real route handlers (files, terminal, solc, …)
-src/lib/server/*                    Path safety, exec allowlist, vault, sqlite, SSRF
-src/components/*                    UI wired to APIs — no SAMPLE_FILES / mock shell
-```
+Until then, Akiro shows **Needs configuration** — it will not pretend they succeeded.
 
-## Routes
+## Pages
 
-| Path | Section |
+| Page | Path |
 | --- | --- |
-| `/` → `/dashboard` | Dashboard |
-| `/workspace` | Development Workspace |
-| `/ai-lab` | AI Coding Lab |
-| `/web3` | Web3 Hub |
-| `/tools` | Developer Tools |
-| `/integrations` | Integrations |
-| `/settings` | Settings |
-| `/sign-in` | Auth (guest labelled; GitHub when configured) |
+| Dashboard | `/dashboard` |
+| Workspace | `/workspace` |
+| AI Coding Lab | `/ai-lab` |
+| Web3 Hub | `/web3` |
+| Tools | `/tools` |
+| Integrations | `/integrations` |
+| Settings | `/settings` |
 
-## Security highlights
+## Stack
 
-- No seed phrases / private keys — ever
-- Server secrets via `process.env` only
-- Sensitive actions need confirm UI
-- **Verified** vs **Suggestion** labelling
+Next.js · React · TypeScript · Tailwind · Monaco · solc · wagmi / viem · SQLite
 
-See [SECURITY.md](./SECURITY.md).
+## Security
 
-## Licence
+- Never asks for seed phrases or private keys
+- Secrets stay on the server (`.env.local`)
+- Destructive actions ask for confirmation
 
-Private / unpublished — all rights reserved unless otherwise stated.
+More detail: [SECURITY.md](./SECURITY.md)
