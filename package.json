@@ -1,0 +1,41 @@
+{
+  "name": "akiro",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "@tanstack/react-query": "^5.104.0",
+    "monaco-editor": "^0.57.0",
+    "next": "16.3.6",
+    "next-auth": "^5.0.0-beta.32",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "solc": "^0.8.37",
+    "sql.js": "^1.14.2",
+    "viem": "^2.56.9",
+    "wagmi": "^3.7.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/sql.js": "^1.4.11",
+    "@vitejs/plugin-react": "^6.1.1",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.6",
+    "jsdom": "^30.1.1",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "vitest": "^3.2.4"
+  },
+  "description": "Akiro — lightweight Web3 development environment. One website. Twenty tools. One expert AI."
+}

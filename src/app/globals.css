@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand */
+  --background: #080b0d;
+  --foreground: #e8ecef;
+  --muted: #9aa3ab;
+  --muted-foreground: #6b737a;
+
+  --surface: #0e1317;
+  --surface-raised: #141b21;
+  --surface-overlay: #1a232b;
+  --border: #24303a;
+  --border-subtle: #1a242c;
+
+  --accent-green: #22e676;
+  --accent-green-dim: #1ab85e;
+  --accent-blue: #3478f6;
+  --accent-blue-dim: #2a62c9;
+  --gold: #d9a441;
+  --gold-dim: #b8872e;
+  --snake-red: #e23b3b;
+  --snake-red-dim: #c42f2f;
+
+  --danger: #f04444;
+  --warning: #f5a524;
+  --success: #22e676;
+
+  --ring: #3478f6;
+  --focus-ring: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+
+  --sidebar-width: 16rem;
+  --sidebar-collapsed-width: 4rem;
+  --right-panel-width: 20rem;
+  --bottom-panel-height: 14rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-overlay: var(--surface-overlay);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
+  --color-accent-green: var(--accent-green);
+  --color-accent-green-dim: var(--accent-green-dim);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-blue-dim: var(--accent-blue-dim);
+  --color-gold: var(--gold);
+  --color-gold-dim: var(--gold-dim);
+  --color-snake-red: var(--snake-red);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-success: var(--success);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent-blue) 40%, transparent);
+  color: var(--foreground);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Utility helpers */
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
