@@ -45,6 +45,7 @@ export function WorkspaceView() {
   const [dirtyPaths, setDirtyPaths] = useState<Set<string>>(() => new Set());
   const [layout, setLayout] = useState<PreviewLayout>("split");
   const [treeCollapsed, setTreeCollapsed] = useState(false);
+  const [mobileTreeOpen, setMobileTreeOpen] = useState(false);
   const [appliedVersionSeen, setAppliedVersionSeen] = useState(0);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -238,16 +239,45 @@ export function WorkspaceView() {
         onSave={() => void onSave()}
         saving={saving}
         dirty={activePath ? dirtyPaths.has(activePath) : false}
+        onOpenTree={() => setMobileTreeOpen(true)}
       />
       {loadError ? (
         <p className="border-b border-danger/30 bg-danger/10 px-3 py-1.5 text-xs text-danger">
           {loadError}
         </p>
       ) : null}
+      {/* Mobile file tree sheet */}
+      {mobileTreeOpen ? (
+        <div
+          className="fixed inset-0 z-40 md:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="File tree"
+        >
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/60 akiro-overlay"
+            aria-label="Close file tree"
+            onClick={() => setMobileTreeOpen(false)}
+          />
+          <div className="relative z-10 h-full w-[min(18rem,85vw)] bg-surface shadow-[var(--shadow-lg)] akiro-drawer-left">
+            <FileTree
+              tree={tree}
+              activePath={activePath}
+              onOpenFile={(p) => {
+                void openFile(p);
+                setMobileTreeOpen(false);
+              }}
+            />
+          </div>
+        </div>
+      ) : null}
+
       <div className="flex min-h-0 flex-1">
+        {/* Desktop file tree */}
         <div
           className={[
-            "shrink-0 border-r border-border transition-[width]",
+            "hidden md:block shrink-0 border-r border-border transition-[width] duration-200",
             treeCollapsed ? "w-10" : "w-56",
           ].join(" ")}
         >
@@ -255,11 +285,11 @@ export function WorkspaceView() {
             <div className="flex h-full flex-col items-center py-2">
               <button
                 type="button"
-                className="rounded p-1.5 text-muted hover:bg-surface-raised hover:text-foreground"
+                className="rounded p-2 text-muted hover:bg-surface-raised hover:text-foreground min-h-11 min-w-11 flex items-center justify-center"
                 aria-label="Expand file tree"
                 onClick={() => setTreeCollapsed(false)}
               >
-                <span className="text-xs">📁</span>
+                <span className="text-xs" aria-hidden>📁</span>
               </button>
             </div>
           ) : (
@@ -271,7 +301,7 @@ export function WorkspaceView() {
               />
               <button
                 type="button"
-                className="absolute right-1 top-2 rounded p-1 text-muted-foreground hover:bg-surface-raised hover:text-foreground"
+                className="absolute right-1 top-2 rounded p-2 text-muted-foreground hover:bg-surface-raised hover:text-foreground min-h-9 min-w-9"
                 aria-label="Collapse file tree"
                 onClick={() => setTreeCollapsed(true)}
               >
@@ -286,7 +316,9 @@ export function WorkspaceView() {
             <div
               className={[
                 "flex min-h-0 min-w-0 flex-col",
-                showPreview ? "w-1/2 border-r border-border" : "w-full",
+                showPreview
+                  ? "w-full md:w-1/2 border-border md:border-r"
+                  : "w-full",
               ].join(" ")}
             >
               <EditorTabs
@@ -307,7 +339,14 @@ export function WorkspaceView() {
             </div>
           ) : null}
           {showPreview ? (
-            <div className={showEditor ? "w-1/2 min-h-0" : "w-full min-h-0"}>
+            <div
+              className={[
+                "min-h-0",
+                showEditor
+                  ? "hidden md:block md:w-1/2"
+                  : "w-full",
+              ].join(" ")}
+            >
               <PreviewPane
                 activePath={activePath}
                 content={value}

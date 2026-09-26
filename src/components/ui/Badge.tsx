@@ -20,15 +20,17 @@ export type BadgeProps = {
 
 const variantClasses: Record<BadgeVariant, string> = {
   default: "bg-surface-overlay text-muted border-border",
-  success: "bg-accent-green/15 text-accent-green border-accent-green/30",
-  warning: "bg-warning/15 text-warning border-warning/30",
-  danger: "bg-danger/15 text-danger border-danger/30",
-  info: "bg-accent-blue/15 text-accent-blue border-accent-blue/30",
+  success:
+    "bg-accent-green/12 text-accent-green border-accent-green/35 shadow-[0_0_8px_color-mix(in_srgb,var(--accent-green)_12%,transparent)]",
+  warning: "bg-warning/12 text-warning border-warning/35",
+  danger: "bg-danger/12 text-danger border-danger/35",
+  info: "bg-accent-blue/12 text-accent-blue border-accent-blue/35",
   planned: "bg-surface-overlay text-muted border-border",
-  progress: "bg-accent-blue/15 text-accent-blue border-accent-blue/30",
-  available: "bg-accent-green/15 text-accent-green border-accent-green/30",
-  disconnected: "bg-warning/15 text-warning border-warning/30",
-  configured: "bg-muted-foreground/15 text-muted border-border",
+  progress: "bg-accent-blue/12 text-accent-blue border-accent-blue/35",
+  available:
+    "bg-accent-green/12 text-accent-green border-accent-green/35 shadow-[0_0_8px_color-mix(in_srgb,var(--accent-green)_12%,transparent)]",
+  disconnected: "bg-warning/12 text-warning border-warning/35",
+  configured: "bg-gold/10 text-gold border-gold/30",
 };
 
 export function Badge({
@@ -39,8 +41,9 @@ export function Badge({
   return (
     <span
       className={[
-        "inline-flex items-center rounded-full border px-2 py-0.5",
+        "inline-flex items-center gap-1 rounded-full border px-2 py-0.5",
         "text-[11px] font-medium leading-tight tracking-wide uppercase",
+        "whitespace-nowrap",
         variantClasses[variant],
         className,
       ]
@@ -52,9 +55,7 @@ export function Badge({
   );
 }
 
-export function statusToBadgeVariant(
-  status: string,
-): BadgeVariant {
+export function statusToBadgeVariant(status: string): BadgeVariant {
   switch (status) {
     case "In progress":
       return "progress";
@@ -71,6 +72,8 @@ export function statusToBadgeVariant(
     case "Demo":
       return "progress";
     case "Connected":
+      return "available";
+    case "Configured":
       return "available";
     default:
       return "default";

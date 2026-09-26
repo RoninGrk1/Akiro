@@ -32,7 +32,7 @@ export function RightPanel({ collapsed, onToggle }: RightPanelProps) {
     <Panel
       as="aside"
       title="AI chat"
-      className="w-96 shrink-0 border-l "
+      className="w-80 xl:w-96 shrink-0 border-l"
       aria-label="AI chat"
       actions={
         <Button

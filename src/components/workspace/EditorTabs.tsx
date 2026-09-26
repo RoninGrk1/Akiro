@@ -39,9 +39,9 @@ export function EditorTabs({
             role="tab"
             aria-selected={active}
             className={[
-              "group flex max-w-[12rem] items-center gap-1 border-r border-border-subtle px-2 text-xs",
+              "group flex max-w-[12rem] items-center gap-1 border-r border-border-subtle px-2 text-xs relative",
               active
-                ? "bg-background text-foreground"
+                ? "bg-background text-foreground after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-accent-green"
                 : "text-muted hover:bg-surface-raised hover:text-foreground",
             ].join(" ")}
           >
@@ -60,7 +60,7 @@ export function EditorTabs({
             </button>
             <button
               type="button"
-              className="rounded p-0.5 text-muted-foreground opacity-60 hover:bg-surface-overlay hover:opacity-100 group-hover:opacity-100"
+              className="rounded p-1.5 sm:p-0.5 text-muted-foreground opacity-100 sm:opacity-60 hover:bg-surface-overlay hover:opacity-100 group-hover:opacity-100 min-h-8 min-w-8 sm:min-h-0 sm:min-w-0 flex items-center justify-center"
               aria-label={`Close ${name}`}
               onClick={(e) => {
                 e.stopPropagation();

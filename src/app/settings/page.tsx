@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function SettingsPage() {
   return (
-    <div className="p-6 md:p-8">
+    <div className="p-4 sm:p-6 md:p-8">
       <PageHeader
         title="Settings"
         description="Preferences, account, and environment configuration for Akiro."
@@ -19,17 +19,18 @@ export default function SettingsPage() {
         <Card>
           <CardHeader
             title="Appearance"
-            description="Theme is dark (near-black #080B0D). Accents: green, blue, gold."
+            description="Dark theme (near-black #080B0D). Accents: green, blue, gold."
             action={<Badge variant="available">Available</Badge>}
           />
           <p className="text-xs text-muted">
-            Language: British English (en-GB). Skip-to-content link is enabled on all shell pages.
+            Language: British English (en-GB). Skip-to-content is enabled on all
+            shell pages.
           </p>
         </Card>
         <Card>
           <CardHeader
             title="Account & authentication"
-            description="Guest mode is labelled. GitHub OAuth Needs configuration until server env vars are set."
+            description="Guest mode is labelled. GitHub OAuth needs configuration until server env vars are set."
             action={<Badge variant="configured">Needs configuration</Badge>}
           />
           <p className="text-xs text-muted font-mono">
@@ -37,7 +38,10 @@ export default function SettingsPage() {
           </p>
           <p className="mt-2 text-xs text-muted">
             See{" "}
-            <Link href="/integrations" className="text-accent-blue hover:underline">
+            <Link
+              href="/integrations"
+              className="text-accent-blue hover:underline"
+            >
               Integrations
             </Link>{" "}
             and{" "}
@@ -53,7 +57,10 @@ export default function SettingsPage() {
             description="AES-GCM vault on disk (ENV_VAULT_SECRET in .env.local)."
             action={<Badge variant="available">Available</Badge>}
           />
-          <Link href="/integrations" className="text-xs text-accent-blue hover:underline">
+          <Link
+            href="/integrations"
+            className="inline-flex min-h-9 items-center text-xs text-accent-blue hover:underline"
+          >
             Open env manager →
           </Link>
         </Card>
@@ -63,7 +70,10 @@ export default function SettingsPage() {
             description="Stored in localStorage from the Web3 Hub. Avoid API keys in URL query strings."
             action={<Badge variant="available">Available</Badge>}
           />
-          <Link href="/web3" className="text-xs text-accent-blue hover:underline">
+          <Link
+            href="/web3"
+            className="inline-flex min-h-9 items-center text-xs text-accent-blue hover:underline"
+          >
             Open Web3 Hub →
           </Link>
         </Card>

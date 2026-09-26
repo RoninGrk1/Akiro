@@ -176,12 +176,13 @@ export function WorkspaceTerminal() {
 
   return (
     <div
-      className="flex h-full min-h-0 flex-col bg-background font-mono text-xs"
+      className="flex h-full min-h-0 flex-col bg-[#06090b] font-mono text-xs"
       onClick={() => inputRef.current?.focus()}
       role="application"
       aria-label="Workspace terminal"
     >
-      <div className="shrink-0 border-b border-border-subtle px-3 py-1.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+      <div className="shrink-0 border-b border-border-subtle px-3 py-1.5 text-[10px] uppercase tracking-wider text-muted-foreground flex items-center gap-2">
+        <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent-green shadow-[0_0_6px_var(--accent-green)]" aria-hidden />
         Sandboxed shell · project cwd · allowlisted binaries
       </div>
       <div className="min-h-0 flex-1 overflow-auto p-3 leading-relaxed">

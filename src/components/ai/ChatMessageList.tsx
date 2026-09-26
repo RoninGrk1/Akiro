@@ -54,15 +54,15 @@ function MessageBubble({
   return (
     <div
       className={[
-        "rounded-lg border p-3",
+        "rounded-lg border p-3 transition-colors duration-150",
         isUser
-          ? "border-accent-blue/30 bg-accent-blue/10 ml-4"
+          ? "border-accent-blue/30 bg-accent-blue/10 ml-2 sm:ml-6"
           : isSystem
             ? "border-gold/30 bg-gold/5"
-            : "border-border-subtle bg-surface-raised mr-2",
+            : "border-border-subtle bg-surface-raised mr-1 sm:mr-4",
       ].join(" ")}
     >
-      <div className="mb-1 flex items-center justify-between gap-2">
+      <div className="mb-1.5 flex items-center justify-between gap-2">
         <span className="text-[10px] font-semibold uppercase tracking-wider text-muted">
           {isUser ? "You" : isSystem ? "System" : "Akiro AI"}
           {message.action && message.action !== "chat"
@@ -84,7 +84,10 @@ function MessageBubble({
       {message.claims && message.claims.length > 0 ? (
         <ul className="mt-2 space-y-1.5">
           {message.claims.map((c, i) => (
-            <li key={i} className="flex flex-wrap items-start gap-2 text-xs text-muted">
+            <li
+              key={i}
+              className="flex flex-wrap items-start gap-2 text-xs text-muted"
+            >
               <ClaimBadge kind={c.kind} />
               <span className="min-w-0 flex-1">{c.text}</span>
             </li>
@@ -94,7 +97,10 @@ function MessageBubble({
       {message.proposedPatch ? (
         <div className="mt-3 rounded-md border border-border bg-background p-2">
           <p className="text-xs text-muted mb-2">
-            Patch: <code className="font-mono text-accent-green">{message.proposedPatch.path}</code>
+            Patch:{" "}
+            <code className="font-mono text-accent-green">
+              {message.proposedPatch.path}
+            </code>
             {" — "}
             {message.proposedPatch.description}
           </p>

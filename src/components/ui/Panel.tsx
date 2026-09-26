@@ -26,7 +26,7 @@ export function Panel({
       {...props}
     >
       {(title || actions) && (
-        <div className="flex h-10 shrink-0 items-center justify-between gap-2 border-b border-border-subtle px-3">
+        <div className="flex h-11 sm:h-10 shrink-0 items-center justify-between gap-2 border-b border-border-subtle px-3">
           {title ? (
             <h2 className="truncate text-xs font-semibold uppercase tracking-wider text-muted">
               {title}

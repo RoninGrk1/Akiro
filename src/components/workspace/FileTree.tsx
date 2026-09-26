@@ -77,7 +77,7 @@ function TreeItem({
       <div role="treeitem" aria-expanded={isOpen} aria-selected={false}>
         <button
           type="button"
-          className="flex w-full items-center gap-1.5 py-1 pr-2 text-left text-xs text-muted hover:bg-surface-raised hover:text-foreground"
+          className="flex w-full items-center gap-1.5 py-2 sm:py-1 pr-2 text-left text-xs text-muted hover:bg-surface-raised hover:text-foreground active:bg-surface-overlay min-h-10 sm:min-h-0"
           style={{ paddingLeft: pad }}
           onClick={() => onToggle(node.path)}
           onKeyDown={(e: KeyboardEvent<HTMLButtonElement>) => {
@@ -120,10 +120,10 @@ function TreeItem({
       <button
         type="button"
         className={[
-          "flex w-full items-center gap-1.5 py-1 pr-2 text-left text-xs",
+          "flex w-full items-center gap-1.5 py-2 sm:py-1 pr-2 text-left text-xs min-h-10 sm:min-h-0",
           active
             ? "bg-accent-green/10 text-accent-green"
-            : "text-muted hover:bg-surface-raised hover:text-foreground",
+            : "text-muted hover:bg-surface-raised hover:text-foreground active:bg-surface-overlay",
         ].join(" ")}
         style={{ paddingLeft: pad + 14 }}
         onClick={() => onOpenFile(node.path)}

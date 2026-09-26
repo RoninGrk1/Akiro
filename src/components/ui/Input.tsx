@@ -26,10 +26,11 @@ export function Input({
       <input
         id={inputId}
         className={[
-          "h-10 w-full rounded-md border bg-surface px-3 text-sm text-foreground",
+          "h-11 sm:h-10 w-full rounded-md border bg-surface px-3 text-sm text-foreground",
           "placeholder:text-muted-foreground",
           "border-border hover:border-muted-foreground/50",
           "focus-visible:outline-none focus-visible:border-accent-blue",
+          "transition-[border-color,box-shadow] duration-200 ease-out",
           "disabled:opacity-50 disabled:cursor-not-allowed",
           error ? "border-danger" : "",
           className,

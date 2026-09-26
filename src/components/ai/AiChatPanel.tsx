@@ -99,7 +99,7 @@ export function AiChatPanel({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask Akiro… (requires AI_API_KEY)"
-          className="w-full resize-none rounded-md border border-border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground"
+          className="w-full resize-none rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground transition-[border-color] duration-150 focus-visible:border-accent-blue focus-visible:outline-none"
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();

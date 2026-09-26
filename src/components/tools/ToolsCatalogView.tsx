@@ -11,7 +11,7 @@ export function ToolsCatalogView() {
   const catalog = getToolsCatalog();
 
   return (
-    <div className="p-4 md:p-6">
+    <div className="p-4 sm:p-6">
       <PageHeader
         title="Developer Tools"
         description="All twenty Akiro tools with deep links into the workspace, AI lab, Web3 hub, or integrations UI."
@@ -27,27 +27,34 @@ export function ToolsCatalogView() {
               >
                 {category}
               </h2>
-              <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 xl:grid-cols-3">
                 {items.map(({ tool, href }) => (
-                  <Card key={tool.id} padding="md" className="flex flex-col">
-                    <div className="mb-2 flex items-start justify-between gap-2">
-                      <h3 className="text-sm font-semibold text-foreground">
-                        {tool.name}
-                      </h3>
-                      <Badge variant={statusToBadgeVariant(tool.status)}>
-                        {tool.status}
-                      </Badge>
-                    </div>
-                    <p className="flex-1 text-xs text-muted leading-relaxed">
-                      {tool.description}
-                    </p>
-                    <Link
-                      href={href}
-                      className="mt-3 text-xs font-medium text-accent-blue hover:underline"
+                  <Link
+                    key={tool.id}
+                    href={href}
+                    className="block h-full rounded-lg focus-visible:outline-none"
+                  >
+                    <Card
+                      padding="md"
+                      interactive
+                      className="flex h-full flex-col min-h-[7.5rem]"
                     >
-                      Open →
-                    </Link>
-                  </Card>
+                      <div className="mb-2 flex items-start justify-between gap-2">
+                        <h3 className="text-sm font-semibold text-foreground">
+                          {tool.name}
+                        </h3>
+                        <Badge variant={statusToBadgeVariant(tool.status)}>
+                          {tool.status}
+                        </Badge>
+                      </div>
+                      <p className="flex-1 text-xs text-muted leading-relaxed">
+                        {tool.description}
+                      </p>
+                      <span className="mt-3 text-xs font-medium text-accent-blue">
+                        Open →
+                      </span>
+                    </Card>
+                  </Link>
                 ))}
               </div>
             </section>
